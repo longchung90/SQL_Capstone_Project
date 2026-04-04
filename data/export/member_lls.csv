@@ -1,0 +1,403 @@
+name,party,chamber,state,median_rt,tweet_count,LLS
+Elizabeth Warren,Democrat,Senate,MA,437.0,2027,5989.81
+Senator Ted Cruz,Republican,Senate,TX,221.0,3239,3215.55
+Marco Rubio,Republican,Senate,FL,162.0,3212,2354.66
+Kamala Harris,Democrat,Senate,CA,172.0,674,2016.96
+Chuck Schumer,Democrat,Senate,NY,99.0,3246,1440.83
+Nancy Pelosi,Democrat,House,CA,131.0,3240,1058.96
+Cory Booker,Democrat,Senate,NJ,59.0,3226,858.02
+John Lewis,Republican,Senate,VA,43.0,1747,577.89
+John Kasich,Republican,House,OH,57.0,3244,460.84
+Rep. Keith Ellison,Democrat,House,MN,56.0,3221,452.35
+John McCain,Republican,Senate,AZ,31.0,3209,450.53
+Joaquin Castro,Democrat,House,TX,49.0,3228,395.92
+Kirsten Gillibrand,Democrat,Senate,NY,26.0,3210,377.88
+Senator Jeff Merkley,Democrat,Senate,OR,25.0,3240,363.76
+Jim Bridenstine,Republican,House,OK,50.0,1432,363.38
+Tim Scott,Republican,Senate,SC,23.0,3198,334.12
+Senator Cortez Masto,Democrat,Senate,NV,27.0,780,323.7
+Rep. Don Beyer,Democrat,House,VA,37.0,3258,299.3
+Mike Lee,Republican,Senate,UT,20.0,3224,290.83
+Ed Markey,Democrat,Senate,MA,18.0,3214,261.65
+Chris Van Hollen,Democrat,Senate,MD,17.0,2429,238.55
+Ron Wyden,Democrat,Senate,OR,16.0,3245,232.85
+Senator Patty Murray,Democrat,Senate,WA,16.0,3233,232.75
+Rep. Barbara Lee,Democrat,House,CA,26.0,3198,209.84
+Senator Dick Durbin,Democrat,Senate,IL,14.0,3252,203.8
+Rick Scott,Republican,Senate,FL,14.0,3210,203.47
+Amy Klobuchar,Democrat,Senate,MN,13.0,3220,189.01
+Rep. Jamie Raskin,Democrat,House,MD,25.0,1705,186.05
+Sherrod Brown,Democrat,Senate,OH,12.0,3091,173.59
+Darrell Issa,Republican,House,CA,21.0,3233,169.71
+Brian Schatz,Democrat,Senate,HI,11.0,3239,160.05
+Claire McCaskill,Democrat,Senate,MO,11.0,3237,160.04
+JohnCornyn,Republican,Senate,TX,11.0,3231,160.0
+Jason Chaffetz,Republican,House,UT,18.0,3233,145.47
+Sen. Patrick Leahy,Democrat,Senate,VT,10.0,3211,145.34
+Jim McGovern,Democrat,House,MA,17.0,3202,137.22
+Lindsey Graham,Republican,Senate,SC,9.0,3249,131.0
+Mark Warner,Democrat,Senate,VA,9.0,3204,130.77
+Louie Gohmert,Republican,House,TX,16.0,3242,129.35
+Thom Tillis,Republican,Senate,NC,9.0,2101,123.94
+Trey Gowdy,Republican,House,SC,16.0,1755,119.53
+Tom Cotton,Republican,Senate,AR,8.0,3249,116.44
+Sheldon Whitehouse,Democrat,Senate,RI,8.0,3219,116.31
+Joni Ernst,Republican,Senate,IA,9.0,1265,115.73
+Senator Bob Corker,Republican,Senate,TN,7.0,3237,101.84
+Sen. Tammy Baldwin,Democrat,Senate,WI,7.0,3205,101.72
+Jeff Flake,Republican,Senate,AZ,7.0,2119,96.51
+Bill Nelson,Democrat,Senate,FL,8.0,601,92.16
+(((Rep. Nadler))),Democrat,House,NY,11.0,3234,88.9
+Steny Hoyer,Democrat,House,MD,11.0,3225,88.87
+Adam Schiff,Democrat,Senate,CA,6.0,3242,87.31
+Sen. Maria Cantwell,Democrat,Senate,WA,6.0,3237,87.29
+Senator John Thune,Republican,Senate,SD,6.0,3228,87.26
+Martin Heinrich,Democrat,Senate,NM,6.0,3225,87.25
+Richard Blumenthal,Democrat,Senate,CT,6.0,3222,87.24
+Steve King,Republican,House,IA,11.0,1819,82.57
+Kevin McCarthy,Republican,House,CA,10.0,3224,80.79
+Rep. Steve Scalise,Republican,House,LA,10.0,3212,80.75
+Thomas Massie,Republican,House,KY,10.0,2139,76.69
+Ileana Ros-Lehtinen,Republican,House,FL,9.0,3246,72.77
+Tom Udall,Democrat,Senate,NM,5.0,3244,72.76
+ChuckGrassley,Republican,Senate,IA,5.0,3239,72.75
+Jan Schakowsky,Democrat,House,IL,9.0,3236,72.74
+Sen. James Lankford,Republican,Senate,OK,5.0,3230,72.72
+Pramila Jayapal,Democrat,House,WA,9.0,3222,72.7
+Sen. Jeanne Shaheen,Democrat,Senate,NH,5.0,3218,72.69
+Marsha Blackburn,Republican,Senate,TN,5.0,3203,72.65
+Richard Burr,Republican,Senate,NC,5.0,3119,72.41
+Katherine Clark,Democrat,House,MA,9.0,3036,72.17
+Tammy Duckworth,Democrat,Senate,IL,5.0,2704,71.13
+Ruben Gallego,Democrat,Senate,AZ,5.0,2381,69.98
+David Perdue,Republican,Senate,GA,5.0,1729,67.1
+Richard Shelby,Republican,Senate,AL,5.0,1414,65.29
+Governor Nathan Deal,Republican,House,GA,8.0,2522,62.67
+Maxine Waters,Democrat,House,CA,8.0,2253,61.76
+Mark Takano,Democrat,House,CA,8.0,1998,60.8
+Senator Ron Johnson,Republican,Senate,WI,4.0,3249,58.22
+Pat Roberts,Republican,Senate,KS,4.0,3234,58.19
+Senator Mazie Hirono,Democrat,Senate,HI,4.0,3234,58.19
+Sen. John Barrasso,Republican,Senate,WY,4.0,3230,58.18
+Sen. Maggie Hassan,Democrat,Senate,NH,4.0,3232,58.18
+Senator Chris Coons,Democrat,Senate,DE,4.0,3225,58.17
+Cory Gardner,Republican,Senate,CO,4.0,3224,58.17
+Dean Heller,Republican,Senate,NV,4.0,3222,58.16
+Senator Jack Reed,Democrat,Senate,RI,4.0,3210,58.14
+Sen. Lamar Alexander,Republican,Senate,TN,4.0,3206,58.13
+Bill Cassidy,Republican,Senate,LA,4.0,3195,58.1
+Jacky Rosen,Democrat,Senate,NV,6.0,190,56.72
+Mark Meadows,Republican,House,NC,7.0,3205,56.51
+Rosa DeLauro,Democrat,House,CT,7.0,3197,56.49
+Rep. Eric Swalwell,Democrat,House,CA,7.0,3198,56.49
+Sen. Debbie Stabenow,Democrat,Senate,MI,4.0,2246,55.56
+Sen. Susan Collins,Republican,Senate,ME,4.0,2107,55.11
+Senator Thad Cochran,Republican,Senate,MS,4.0,1853,54.18
+Rep. Jim Jordan,Republican,House,OH,7.0,2172,53.79
+Rep. David Valadao,Republican,House,CA,8.0,790,53.39
+Rep. Nydia Velazquez,Democrat,House,NY,7.0,1967,53.09
+Rep. Mia Love,Republican,House,UT,8.0,705,52.48
+Jackie Speier,Democrat,House,CA,6.0,3246,48.51
+Congressman Tim Ryan,Democrat,House,OH,6.0,3232,48.49
+Gwen Moore,Democrat,House,WI,6.0,3222,48.47
+Gov. Asa Hutchinson,Republican,House,AR,6.0,3215,48.46
+Steve Cohen,Democrat,House,TN,6.0,3194,48.42
+Rep. Mark Pocan,Democrat,House,WI,6.0,3103,48.24
+Rep. Tulsi Gabbard,Democrat,House,HI,6.0,2593,47.17
+Hakeem Jeffries,Democrat,House,NY,6.0,2204,46.19
+Jim Cooper,Democrat,House,TN,6.0,2161,46.07
+Jerry Moran,Republican,Senate,KS,3.0,3242,43.65
+Steve Daines,Republican,Senate,MT,3.0,3233,43.64
+Senator Deb Fischer,Republican,Senate,NE,3.0,3225,43.63
+Senator Joe Donnelly,Democrat,Senate,IN,3.0,3222,43.62
+Senator Gary Peters,Democrat,Senate,MI,3.0,3223,43.62
+Sen. Lisa Murkowski,Republican,Senate,AK,3.0,3215,43.61
+Senator Roy Blunt,Republican,Senate,MO,3.0,3218,43.61
+Governor Jim Justice,Republican,Senate,WV,3.0,3210,43.6
+Governor Mark Dayton,Democrat,Senate,MN,3.0,3204,43.59
+Senator Roger Wicker,Republican,Senate,MS,3.0,3200,43.58
+Senator John Boozman,Republican,Senate,AR,3.0,3141,43.48
+Senator Jon Tester,Democrat,Senate,MT,3.0,3071,43.36
+Gov. Pete Ricketts,Republican,Senate,NE,3.0,2497,42.25
+Senator John Hoeven,Republican,Senate,ND,3.0,2035,41.14
+Martha McSally,Republican,Senate,AZ,3.0,1984,41.0
+Nanette D. Barragán,Democrat,House,CA,6.0,898,40.81
+Rep. Terri A. Sewell,Democrat,House,AL,5.0,3240,40.42
+Joyce Beatty,Democrat,House,OH,5.0,3242,40.42
+Judy Chu,Democrat,House,CA,5.0,3237,40.41
+Mario Diaz-Balart,Republican,House,FL,5.0,3228,40.4
+Dwight Evans,Democrat,House,PA,5.0,3231,40.4
+"Rep. Paul Gosar, DDS",Republican,House,AZ,5.0,3195,40.35
+James Comer,Republican,House,KY,5.0,3181,40.33
+Rep. Diana DeGette,Democrat,House,CO,5.0,3178,40.32
+Senator Mike Rounds,Republican,Senate,SD,3.0,1739,40.29
+SenDanSullivan,Republican,Senate,AK,3.0,1582,39.78
+Rep. Ted Lieu,Democrat,House,CA,5.0,2705,39.52
+Earl Blumenauer,Democrat,House,OR,5.0,2664,39.44
+Rep. Val Demings,Democrat,House,FL,6.0,689,39.22
+Warren Davidson,Republican,House,OH,6.0,677,39.11
+Rep. Trent Franks,Republican,House,AZ,5.0,2172,38.42
+Ron DeSantis,Republican,House,FL,5.0,2016,38.05
+Rep. Salud Carbajal,Democrat,House,CA,7.0,193,36.88
+Senator Jim Risch,Republican,Senate,ID,3.0,713,35.48
+Lou Correa,Democrat,House,CA,7.0,130,34.13
+Jim Banks,Republican,Senate,IN,3.0,526,33.84
+Bob Goodlatte,Republican,House,VA,4.0,3245,32.34
+Rep. Tim Murphy,Republican,House,PA,4.0,3246,32.34
+Mike Quigley,Democrat,House,IL,4.0,3239,32.33
+Dina Titus,Democrat,House,NV,4.0,3237,32.33
+Rep. Hank Johnson,Democrat,House,GA,4.0,3227,32.32
+Fred Upton,Republican,House,MI,4.0,3218,32.31
+Rep. Emanuel Cleaver,Democrat,House,MO,4.0,3217,32.31
+Governor Mary Fallin,Republican,House,OK,4.0,3215,32.3
+Jared Polis,Democrat,House,CO,4.0,3206,32.29
+Peter Roskam,Republican,House,IL,4.0,3201,32.29
+US Rep Kathy Castor,Democrat,House,FL,4.0,3201,32.29
+Diane Black,Republican,House,TN,4.0,3200,32.28
+Raja Krishnamoorthi,Democrat,House,IL,5.0,631,32.24
+Louise Slaughter,Democrat,House,NY,4.0,2724,31.64
+John Kennedy,Republican,Senate,LA,3.0,305,30.91
+Barbara Comstock,Republican,House,VA,4.0,2143,30.68
+Rep. Carlos Curbelo,Republican,House,FL,4.0,2048,30.5
+Rep. Zoe Lofgren,Democrat,House,CA,4.0,1800,29.98
+Rep. Jared Huffman,Democrat,House,CA,4.0,1764,29.9
+Sen. Heidi Heitkamp,Democrat,Senate,ND,2.0,3245,29.11
+Shelley Moore Capito,Republican,Senate,WV,2.0,3240,29.1
+Senator Mike Crapo,Republican,Senate,ID,2.0,3222,29.08
+Rep. Charlie Crist,Democrat,House,FL,5.0,311,28.72
+Mark DeSaulnier,Democrat,House,CA,4.0,1302,28.69
+Ted Budd,Republican,Senate,NC,3.0,194,28.47
+Rep. Kevin Cramer,Republican,Senate,ND,2.0,2108,27.55
+Congressman Al Green,Democrat,House,TX,4.0,934,27.36
+Markwayne Mullin,Republican,Senate,OK,2.0,1952,27.28
+Jeb Hensarling,Republican,House,TX,4.0,802,26.75
+Rep. Peter Welch,Democrat,Senate,VT,2.0,1446,26.2
+Raul Ruiz,Democrat,House,CA,4.0,653,25.93
+Rep. Jimmy Panetta,Democrat,House,CA,4.0,434,24.3
+Jim Himes,Democrat,House,CT,3.0,3245,24.26
+Rep. Scott Peters,Democrat,House,CA,3.0,3248,24.26
+Lynn Jenkins,Republican,House,KS,3.0,3240,24.25
+US Rep Brendan Boyle,Democrat,House,PA,3.0,3235,24.25
+Rep. Norma Torres,Democrat,House,CA,3.0,3234,24.25
+John Shimkus,Republican,House,IL,3.0,3231,24.24
+Rep. Frank Pallone,Democrat,House,NJ,3.0,3231,24.24
+John Garamendi,Democrat,House,CA,3.0,3230,24.24
+Rep Frederica Wilson,Democrat,House,FL,3.0,3227,24.24
+Rep. Lois Frankel,Democrat,House,FL,3.0,3226,24.24
+U.S. Rep. Billy Long,Republican,House,MO,3.0,3230,24.24
+Rep. Ed Perlmutter,Democrat,House,CO,3.0,3222,24.23
+Rep. Suzan DelBene,Democrat,House,WA,3.0,3215,24.23
+Rep. Will Hurd,Republican,House,TX,3.0,3217,24.23
+Lloyd Doggett,Democrat,House,TX,3.0,3207,24.22
+André Carson,Democrat,House,IN,3.0,3117,24.13
+Brenda Lawrence,Democrat,House,MI,3.0,3011,24.03
+Alma S. Adams,Democrat,House,NC,3.0,2822,23.84
+D. Wasserman Schultz,Democrat,House,FL,3.0,2761,23.77
+Chellie Pingree,Democrat,House,ME,3.0,2666,23.67
+Mike Thompson,Democrat,House,CA,3.0,2625,23.62
+Tom Emmer,Republican,House,MN,3.0,2627,23.62
+Marcy Kaptur,Democrat,House,OH,3.0,2611,23.6
+Ann Wagner,Republican,House,MO,3.0,2525,23.5
+Rep. Andy Barr,Republican,House,KY,3.0,2470,23.44
+Rep. Cheri Bustos,Democrat,House,IL,3.0,2441,23.4
+Jason Lewis,Republican,House,MN,4.0,335,23.27
+Linda T. Sánchez,Democrat,House,CA,3.0,2231,23.13
+Rep. Doris Matsui,Democrat,House,CA,3.0,2216,23.11
+Nita Lowey,Democrat,House,NY,3.0,2167,23.04
+Rep. Mark Walker,Republican,House,NC,3.0,2094,22.94
+Rep. Brian Mast,Republican,House,FL,4.0,305,22.89
+Robin Kelly,Democrat,House,IL,3.0,2038,22.86
+Suzanne Bonamici,Democrat,House,OR,3.0,1921,22.68
+Rep. Walter Jones,Republican,House,VA,3.0,1900,22.65
+Rep. Mike Kelly,Republican,House,PA,3.0,1804,22.49
+Kathleen Rice,Democrat,House,NY,3.0,1797,22.48
+Brian Babin,Republican,House,TX,3.0,1753,22.41
+Rep.Grace Napolitano,Democrat,House,CA,3.0,1635,22.2
+Gary Palmer,Republican,House,AL,3.0,1630,22.19
+Congressman Rod Blum,Republican,House,IA,3.0,1628,22.19
+Mike Bishop,Republican,House,MI,3.0,1392,21.72
+Rep. Juan Vargas,Democrat,House,CA,3.0,1365,21.66
+Rep. Ro Khanna,Democrat,House,CA,3.0,1083,20.97
+Congressman Ken Buck,Republican,House,CO,3.0,1077,20.95
+Rep. Pete Aguilar,Democrat,House,CA,3.0,1032,20.82
+Rep. John Sarbanes,Democrat,House,MD,3.0,973,20.64
+Lee Zeldin,Republican,House,NY,3.0,904,20.42
+Ted Yoho,Republican,House,FL,3.0,792,20.03
+John Katko,Republican,House,NY,3.0,426,18.17
+Dave Trott,Republican,House,MI,3.0,359,17.66
+Rep. Duncan Hunter,Republican,House,CA,3.0,290,17.02
+Rep. Erik Paulsen,Republican,House,MN,2.0,3237,16.17
+Paul Tonko,Democrat,House,NY,2.0,3244,16.17
+Rep. Bill Huizenga,Republican,House,MI,2.0,3241,16.17
+Sean Duffy,Republican,House,WI,2.0,3240,16.17
+Rep. Jeff Duncan,Republican,House,SC,2.0,3245,16.17
+Brad Wenstrup,Republican,House,OH,2.0,3244,16.17
+Elizabeth Esty,Democrat,House,CT,2.0,3237,16.17
+Jackie Walorski,Republican,House,IN,2.0,3240,16.17
+Blake Farenthold,Republican,House,TX,2.0,3226,16.16
+Pete Sessions,Republican,House,TX,2.0,3234,16.16
+Mimi Walters,Republican,House,CA,2.0,3231,16.16
+Ted Poe,Republican,House,TX,2.0,3221,16.16
+Tom Graves,Republican,House,GA,2.0,3226,16.16
+Rep Rick Crawford,Republican,House,AR,2.0,3227,16.16
+Rep. Bill Flores,Republican,House,TX,2.0,3221,16.16
+Rep. Randy Hultgren,Republican,House,IL,2.0,3226,16.16
+Rep Tim Walberg,Republican,House,MI,2.0,3223,16.16
+Niki Tsongas,Democrat,House,MA,2.0,3232,16.16
+Patrick Meehan,Republican,House,PA,2.0,3230,16.16
+David Young,Republican,House,IA,2.0,3232,16.16
+Rep. Doug Lamborn,Republican,House,CO,2.0,3230,16.16
+Richard Hudson,Republican,House,NC,2.0,3236,16.16
+Grace Meng,Democrat,House,NY,2.0,3222,16.16
+Virginia Foxx,Republican,House,NC,2.0,3213,16.15
+Judge Carter,Republican,House,TX,2.0,3206,16.15
+Rep. Sam Graves,Republican,House,MO,2.0,3207,16.15
+Dennis Ross,Republican,House,FL,2.0,3218,16.15
+Adriano Espaillat,Democrat,House,NY,2.0,3208,16.15
+Rep. Martha Roby,Republican,House,AL,2.0,3220,16.15
+Rep. Kristi Noem,Republican,House,SD,2.0,3208,16.15
+Rep. Vicky Hartzler,Republican,House,MO,2.0,3208,16.15
+Rep. Kevin Yoder,Republican,House,KS,2.0,3205,16.15
+Rep. Rick Larsen,Democrat,House,WA,2.0,3211,16.15
+US Rep Rodney Davis,Republican,House,IL,2.0,3207,16.15
+Rep. Tony Cárdenas,Democrat,House,CA,2.0,3216,16.15
+U.S. Rep. Bob Latta,Republican,House,OH,2.0,3192,16.14
+Patrick McHenry,Republican,House,NC,2.0,3200,16.14
+Brian Higgins,Democrat,House,NY,2.0,3199,16.14
+Rep. Joe Courtney,Democrat,House,CT,2.0,3203,16.14
+Rep. Steve Womack,Republican,House,AR,2.0,3196,16.14
+David Cicilline,Democrat,House,RI,2.0,3204,16.14
+Rep. Bradley Byrne,Republican,House,AL,2.0,3201,16.14
+Scott Taylor,Republican,House,VA,2.0,3183,16.13
+Scott DesJarlais,Republican,House,TN,2.0,3165,16.12
+Hal Rogers,Republican,House,KY,2.0,3125,16.1
+Rep. Bruce Westerman,Republican,House,AR,2.0,3110,16.09
+Gregory Meeks,Democrat,House,NY,2.0,3004,16.02
+RepScottPerry,Republican,House,PA,2.0,2887,15.94
+Rep. Tom Marino,Republican,House,PA,2.0,2891,15.94
+Rep. Doug Collins,Republican,House,GA,2.0,2862,15.92
+Lamar Smith,Republican,House,TX,2.0,2851,15.91
+Steve Stivers,Republican,House,OH,2.0,2765,15.85
+Rep. Bob Gibbs,Republican,House,OH,2.0,2736,15.83
+Rep. Mike Coffman,Republican,House,CO,2.0,2683,15.79
+Denny Heck,Democrat,House,WA,2.0,2670,15.78
+Rep. Chris Stewart,Republican,House,UT,2.0,2600,15.73
+"Rep. Andy Harris, MD",Republican,House,MD,2.0,2597,15.72
+Rep. Alan Lowenthal,Democrat,House,CA,2.0,2568,15.7
+Rep. Adrian Smith,Republican,House,NE,2.0,2535,15.68
+Congressman Ami Bera,Democrat,House,CA,2.0,2523,15.67
+Rep. David Kustoff,Republican,House,TN,3.0,179,15.58
+Rep. Marc Veasey,Democrat,House,TX,2.0,2401,15.57
+Rep. Jason Smith,Republican,House,MO,2.0,2389,15.56
+Bill Foster,Democrat,House,IL,2.0,2341,15.52
+Rep. Garret Graves,Republican,House,LA,2.0,2326,15.5
+Rep. Elise Stefanik,Republican,House,NY,2.0,2275,15.46
+Rep. Roger Williams,Republican,House,TX,2.0,2259,15.45
+Rep. John Larson,Democrat,House,CT,2.0,2241,15.43
+Rep. Adam Smith,Democrat,House,WA,2.0,2125,15.32
+US Rep. Mike Turner,Republican,House,OH,2.0,2091,15.29
+Joe Barton,Republican,House,TX,2.0,1965,15.17
+Rep. Greg Walden,Republican,House,OR,2.0,1972,15.17
+Tom Suozzi,Democrat,House,NY,3.0,154,15.13
+Rep. Evan Jenkins,Republican,House,WV,2.0,1909,15.11
+Rep. Lou Barletta,Republican,House,PA,2.0,1896,15.1
+Devin Nunes,Republican,House,CA,2.0,1788,14.98
+Jerry McNerney,Democrat,House,CA,2.0,1705,14.88
+Rep. Luke Messer,Republican,House,IN,2.0,1680,14.85
+Rep. Susan Davis,Democrat,House,CA,2.0,1603,14.76
+John Ratcliffe,Republican,House,TX,2.0,1602,14.76
+Rep. Brad Schneider,Democrat,House,IL,2.0,1560,14.71
+Tom MacArthur,Republican,House,NJ,2.0,1549,14.69
+Rep. Derek Kilmer,Democrat,House,WA,2.0,1513,14.65
+Rep. Paul Cook,Republican,House,CA,2.0,1497,14.62
+Blaine Luetkemeyer,Republican,House,MO,2.0,1452,14.56
+Senator Todd Young,Republican,Senate,IN,1.0,3140,14.49
+Rep. Gene Green,Democrat,House,TX,2.0,1387,14.47
+Rep. Don Young,Republican,House,AK,2.0,1373,14.45
+Joe Wilson,Republican,House,SC,2.0,1357,14.43
+Rep. Jim Costa,Democrat,House,CA,2.0,1328,14.38
+Julia Brownley,Democrat,House,CA,2.0,1327,14.38
+Rep. Ryan Costello,Republican,House,PA,2.0,1324,14.38
+French Hill,Republican,House,AR,2.0,1324,14.38
+Rep. Jody Hice,Republican,House,GA,2.0,1240,14.25
+Mo Brooks,Republican,House,AL,2.0,1186,14.16
+Bill Keating,Democrat,House,MA,2.0,1184,14.15
+RepMarkAmodei,Republican,House,NV,2.0,1138,14.08
+Rep. Brad Sherman,Democrat,House,CA,2.0,1117,14.04
+Rep. Bruce Poliquin,Republican,House,ME,2.0,1073,13.96
+Rep. Tom Cole,Republican,House,OK,2.0,1061,13.94
+Rep. Ron Kind,Democrat,House,WI,2.0,1064,13.94
+Barry Loudermilk,Republican,House,GA,2.0,1036,13.89
+Congressman Tom Rice,Republican,House,SC,2.0,920,13.65
+Rep Dan Newhouse,Republican,House,WA,2.0,862,13.52
+Rep. Danny Davis,Democrat,House,IL,2.0,777,13.31
+RepBThompson,Democrat,House,MS,2.0,752,13.25
+George Holding,Republican,House,NC,2.0,651,12.96
+Darin LaHood,Republican,House,IL,2.0,616,12.85
+Luther Strange,Republican,Senate,AL,1.0,1143,12.68
+Rob Woodall,Republican,House,GA,2.0,548,12.62
+David Rouzer,Republican,House,NC,2.0,517,12.5
+Rep Josh Gottheimer,Democrat,House,NJ,2.0,497,12.42
+Cong. Mike Simpson,Republican,House,ID,2.0,462,12.28
+Rep. Mike Gallagher,Republican,House,WI,2.0,450,12.22
+Rep. Doug LaMalfa,Republican,House,CA,2.0,355,11.75
+John Rutherford,Republican,House,FL,2.0,346,11.7
+Tom McClintock,Republican,House,CA,2.0,289,11.34
+Rep. Arrington,Republican,House,TX,2.0,268,11.19
+Rep. Mike Johnson,Republican,House,LA,2.0,189,10.49
+Rep Andy Biggs,Republican,House,AZ,1.5,854,10.13
+Trey Hollingsworth,Republican,House,IN,2.0,87,8.95
+Collin Peterson,Democrat,House,MN,2.0,80,8.79
+U.S.Rep Gonzalez,Democrat,House,TX,3.0,16,8.5
+Glenn 'GT' Thompson,Republican,House,PA,1.0,3219,8.08
+Ken Calvert,Republican,House,CA,1.0,3240,8.08
+Frank LoBiondo,Republican,House,NJ,1.0,3224,8.08
+Rep. Rob Wittman,Republican,House,VA,1.0,3188,8.07
+Kenny Marchant,Republican,House,TX,1.0,3211,8.07
+Bill Johnson,Republican,House,OH,1.0,3202,8.07
+Rep David Schweikert,Republican,House,AZ,1.0,3192,8.07
+Rep. John Delaney,Democrat,House,NY,1.0,3205,8.07
+Donald Norcross,Democrat,House,NJ,1.0,3184,8.07
+Mike Rogers,Republican,House,AL,1.0,3160,8.06
+Bill Shuster,Republican,House,PA,1.0,3130,8.05
+Dave Joyce,Republican,House,OH,1.0,3121,8.05
+Rep. Chris Collins,Republican,House,NY,1.0,3065,8.03
+Daniel Webster,Republican,House,FL,1.0,2939,7.99
+David Scott,Democrat,House,GA,1.0,2455,7.81
+Jeff Denham,Republican,House,CA,1.0,2453,7.81
+Jeff Fortenberry,Republican,House,NE,1.0,2223,7.71
+Rep. Vern Buchanan,Republican,House,FL,1.0,2216,7.7
+Randy Weber,Republican,House,TX,1.0,2149,7.67
+Albio Sires,Democrat,House,NJ,1.0,2011,7.61
+Rep. Austin Scott,Republican,House,GA,1.0,2019,7.61
+Rep. Kurt Schrader,Democrat,House,OR,1.0,1937,7.57
+Governor John Carney,Democrat,House,DE,1.0,1773,7.48
+John Culberson,Republican,House,TX,1.0,1701,7.44
+Chuck Fleischmann,Republican,House,TN,1.0,1650,7.41
+"Sanford Bishop, Jr.",Democrat,House,GA,1.0,1630,7.4
+Rep. Daniel Lipinski,Democrat,House,IL,1.0,1639,7.4
+Tom Reed,Republican,House,NY,1.0,1590,7.37
+Rep. Kay Granger,Republican,House,TX,1.0,1358,7.21
+Rep. Robert Aderholt,Republican,House,AL,1.0,1279,7.15
+Colleen Hanabusa,Democrat,House,HI,1.0,1271,7.15
+Sam Johnson,Republican,House,TX,1.0,972,6.88
+Rep. Richard Neal,Democrat,House,MA,1.0,915,6.82
+Rodney Frelinghuysen,Republican,House,NJ,1.0,905,6.81
+Rick W. Allen,Republican,House,GA,1.0,850,6.75
+Rep. Brett Guthrie,Republican,House,KY,1.0,712,6.57
+Frank Lucas,Republican,House,OK,1.0,623,6.44
+Rep. Glenn Grothman,Republican,House,WI,1.0,617,6.43
+Rep. John Moolenaar,Republican,House,MI,1.0,613,6.42
+Rep. Don Bacon,Republican,House,NE,1.0,610,6.42
+Trent Kelly,Republican,House,MS,1.0,588,6.38
+Congresswoman Tenney,Republican,House,NY,1.0,430,6.07
+Brian Fitzpatrick,Republican,House,PA,1.0,410,6.02
+Rep. Jack Bergman,Republican,House,MI,1.0,326,5.79
+John Faso,Republican,House,NY,1.0,283,5.65
+Dr. Neal Dunn,Republican,House,FL,1.0,266,5.59
+Francis Rooney,Republican,House,FL,1.0,238,5.48
+Rep. Lloyd Smucker,Republican,House,PA,0.5,1976,3.79
+Rep. Ron Estes,Republican,House,KS,1.0,27,3.33
+Dana Rohrabacher,Republican,House,CA,0.0,3243,0.0
+Bill Posey,Republican,House,FL,0.0,1227,0.0
+Dr. Roger Marshall,Republican,Senate,KS,0.0,747,0.0
