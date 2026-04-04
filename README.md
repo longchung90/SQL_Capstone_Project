@@ -166,3 +166,12 @@ BWS(state, month) = competition_score × min(D_tweets, R_tweets) / max(D_tweets,
 - 24.4% of tweets could not be matched to a party (Independent members, data gaps)
 - Sentiment scored via TextBlob on a 20K random sample — not full corpus
 - LLS and BWS scores should be re-validated with updated data before operational use
+
+## Data
+The raw dataset (`US_PoliticalTweets.tar.gz`, 229MB) is not included 
+in this repo due to GitHub's file size limit.
+
+Download it from: [link to original source or Google Drive]
+
+Once downloaded, place it in the `data/` folder and run 
+`notebooks/milestone_3.ipynb` from the top.
