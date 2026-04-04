@@ -18,16 +18,18 @@
 
 ---
 
-## 📊 Key Figures
+## 📊 Figures
+
+| | |
+|:---:|:---:|
+| <img src="figures/fig1_dem_bigrams.png" alt="Fig 1 — Top 20 Democrat Bigrams" width="100%"/><br><sub>Fig 1 — Top 20 Democrat Bigrams</sub> | <img src="figures/fig2_rep_bigrams.png" alt="Fig 2 — Top 20 Republican Bigrams" width="100%"/><br><sub>Fig 2 — Top 20 Republican Bigrams</sub> |
+| <img src="figures/fig3_bipartisan_bigrams.png" alt="Fig 3 — Top 15 Bipartisan Bigrams" width="100%"/><br><sub>Fig 3 — Top 15 Bipartisan Bigrams</sub> | <img src="figures/fig4_vocab_divergence.png" alt="Fig 4 — Vocabulary Divergence Over Time" width="100%"/><br><sub>Fig 4 — Vocabulary Divergence Over Time</sub> |
+| <img src="figures/fig5_retweet_dist.png" alt="Fig 5 — Retweet Distribution: Senate vs House" width="100%"/><br><sub>Fig 5 — Retweet Distribution: Senate vs House</sub> | <img src="figures/fig6_sentiment_retweets.png" alt="Fig 6 — Sentiment vs Log Retweet Count" width="100%"/><br><sub>Fig 6 — Sentiment vs Log Retweet Count</sub> |
+| <img src="figures/fig7_ols_coefficients.png" alt="Fig 7 — OLS Regression Coefficients" width="100%"/><br><sub>Fig 7 — OLS Regression Coefficients</sub> | <img src="figures/fig8_top_lls_members.png" alt="Fig 8 — Top 20 Members by LLS" width="100%"/><br><sub>Fig 8 — Top 20 Members by LLS</sub> |
 
 <div align="center">
-  <img src="figures/fig1_fig2_top_bigrams.png" alt="Top 20 Distinctive Bigrams by Party" width="48%"/>
-  <img src="figures/fig4_vocab_divergence.png" alt="Vocabulary Divergence Over Time" width="48%"/>
-</div>
-
-<div align="center">
-  <img src="figures/fig8_top_lls_members.png" alt="Top 20 Members by LLS" width="48%"/>
-  <img src="figures/fig9_bws_heatmap.png" alt="Bipartisan Window Score Heatmap" width="48%"/>
+  <img src="figures/fig9_bws_heatmap.png" alt="Fig 9 — Bipartisan Window Score Heatmap by State × Month" width="80%"/><br>
+  <sub>Fig 9 — Bipartisan Window Score Heatmap by State × Month</sub>
 </div>
 
 ---
@@ -88,7 +90,7 @@ Download it from: [link to original source or Google Drive]
 
 Once downloaded, place it in the `data/` folder and run `notebooks/milestone_3.ipynb` from the top.
 
----
+
 
 ## ⚠️ Caveats
 
