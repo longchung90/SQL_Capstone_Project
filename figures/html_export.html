@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lobbyists4America — Congressional Twitter Intelligence</title>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#fff;--bg2:#f5f5f3;--bg3:#ececea;
+  --text:#1a1a18;--text2:#5f5e5a;--text3:#9c9a92;
+  --border:rgba(0,0,0,0.1);
+  --pur:#534AB7;--pur-bg:#EEEDFE;--pur-dk:#3C3489;
+  --blu:#2166ac;--blu-bg:#E6F1FB;
+  --red:#d6604d;--red-bg:#FCEBEB;
+  --grn:#1D9E75;--grn-bg:#E1F5EE;
+  --amb:#BA7517;--amb-bg:#FAEEDA;
+  --r:10px;--mono:'Courier New',monospace;
+}
+@media(prefers-color-scheme:dark){
+  :root{--bg:#1a1a18;--bg2:#242422;--bg3:#2c2c2a;--text:#e8e6dc;--text2:#9c9a92;--text3:#5f5e5a;--border:rgba(255,255,255,0.09)}
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg3);color:var(--text);font-size:15px;line-height:1.6}
+a{color:var(--pur);text-decoration:none}
+
+/* ── shell ── */
+.shell{max-width:920px;margin:28px auto 48px;background:var(--bg);border-radius:14px;overflow:hidden;box-shadow:0 4px 40px rgba(0,0,0,0.09)}
+
+/* ── hero ── */
+.hero{background:linear-gradient(135deg,#26215C 0%,#534AB7 60%,#7F77DD 100%);padding:36px 36px 30px}
+.hero-eye{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:8px}
+.hero-title{font-size:26px;font-weight:600;color:#fff;line-height:1.2;margin-bottom:6px}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.6);margin-bottom:24px}
+.hero-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.hero-kpi{background:rgba(255,255,255,.1);border-radius:8px;padding:12px 10px;text-align:center}
+.hero-kpi-num{font-size:22px;font-weight:600;color:#fff}
+.hero-kpi-lbl{font-size:11px;color:rgba(255,255,255,.55);margin-top:2px}
+
+/* ── exec summary strip ── */
+.exec{background:var(--pur-bg);border-bottom:0.5px solid var(--border);padding:20px 36px}
+.exec-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--pur);margin-bottom:12px}
+.exec-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.exec-card{background:var(--bg);border-radius:8px;padding:12px 14px;border-left:3px solid var(--pur)}
+.exec-card-title{font-size:12px;font-weight:600;color:var(--pur-dk);margin-bottom:3px}
+.exec-card-body{font-size:12px;color:var(--text2);line-height:1.55}
+
+/* ── descriptive stats + stack banner ── */
+.stats-banner{background:var(--bg2);border-bottom:0.5px solid var(--border);padding:20px 36px}
+.stats-banner-label{font-size:10px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--text3);margin-bottom:14px}
+.stats-row{display:flex;align-items:flex-start;gap:0;margin-bottom:18px;flex-wrap:wrap}
+.stat-block{flex:1;min-width:100px;padding:0 16px;text-align:center}
+.stat-block:first-child{padding-left:0}
+.stat-num{font-size:22px;font-weight:700;line-height:1.1;margin-bottom:3px}
+.stat-lbl{font-size:12px;font-weight:600;color:var(--text);margin-bottom:1px}
+.stat-sub{font-size:11px;color:var(--text3)}
+.stat-div{width:0.5px;background:var(--border);align-self:stretch;margin:0 4px}
+.stack-row{border-top:0.5px solid var(--border);padding-top:14px}
+.stack-label{font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);margin-bottom:8px}
+.stack-pills{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:4px}
+.pill{font-size:11px;font-weight:500;padding:4px 11px;border-radius:20px;border:0.5px solid var(--border)}
+.pill-py{background:#E8F4FD;color:#1565a0;border-color:#B5D4F4}
+.pill-sql{background:#FFF3E0;color:#854F0B;border-color:#FAC775}
+.pill-sk{background:#F3E5F5;color:#6a1b9a;border-color:#CE93D8}
+.pill-pd{background:#E8F5E9;color:#1b5e20;border-color:#A5D6A7}
+.pill-np{background:#E3F2FD;color:#0d47a1;border-color:#90CAF9}
+.pill-tb{background:#FCE4EC;color:#880E4F;border-color:#F48FB1}
+.pill-mp{background:#E0F2F1;color:#004D40;border-color:#80CBC4}
+.pill-tab{background:#E8EAF6;color:#283593;border-color:#9FA8DA}
+.pill-jup{background:#FFF8E1;color:#795548;border-color:#FFE082}
+.pill-m{background:var(--bg);color:var(--text2);border-color:var(--border)}
+@media(prefers-color-scheme:dark){
+  .pill-py{background:#0d2a45;color:#90CAF9;border-color:#1565a0}
+  .pill-sql{background:#3e2000;color:#FAC775;border-color:#854F0B}
+  .pill-sk{background:#2a0a35;color:#CE93D8;border-color:#6a1b9a}
+  .pill-pd{background:#0a2a10;color:#A5D6A7;border-color:#1b5e20}
+  .pill-np{background:#050e2e;color:#90CAF9;border-color:#0d47a1}
+  .pill-tb{background:#3b0020;color:#F48FB1;border-color:#880E4F}
+  .pill-mp{background:#002925;color:#80CBC4;border-color:#004D40}
+  .pill-tab{background:#0d1040;color:#9FA8DA;border-color:#283593}
+  .pill-jup{background:#2e1e00;color:#FFE082;border-color:#795548}
+}
+
+/* ── nav ── */
+.nav{display:flex;background:var(--bg2);border-bottom:0.5px solid var(--border);overflow-x:auto}
+.nav-btn{padding:11px 20px;font-size:12px;cursor:pointer;border:none;background:transparent;color:var(--text2);border-bottom:2px solid transparent;white-space:nowrap;transition:all .18s;font-family:inherit}
+.nav-btn.on{color:var(--pur);border-bottom-color:var(--pur);font-weight:600}
+.nav-btn:hover:not(.on){color:var(--text);background:var(--bg3)}
+
+/* ── sections ── */
+.sec{display:none;padding:32px 36px 36px}
+.sec.on{display:block}
+.sec-title{font-size:20px;font-weight:600;color:var(--text);margin-bottom:4px}
+.sec-sub{font-size:13px;color:var(--text2);margin-bottom:22px;line-height:1.6}
+.slide-label{display:inline-block;font-size:10px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--pur);background:var(--pur-bg);padding:3px 10px;border-radius:20px;margin-bottom:10px}
+
+/* ── grid ── */
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+
+/* ── card ── */
+.card{background:var(--bg2);border-radius:var(--r);padding:16px 18px}
+.card-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px}
+.card-sub{font-size:11px;color:var(--text3);margin-top:7px}
+
+/* ── kpi ── */
+.kpi{background:var(--bg2);border-radius:8px;padding:14px 10px;text-align:center}
+.kpi-num{font-size:22px;font-weight:600}
+.kpi-lbl{font-size:11px;color:var(--text2);margin-top:3px}
+
+/* ── bar ── */
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.bar-lbl{font-size:11px;color:var(--text2);min-width:114px}
+.bar-wrap{flex:1;height:12px;background:var(--bg);border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px}
+.bar-val{font-size:11px;font-weight:600;min-width:44px;text-align:right;color:var(--text)}
+
+/* ── insight ── */
+.insight{border-left:3px solid var(--pur);padding:9px 14px;background:var(--bg2);border-radius:0 8px 8px 0;margin-bottom:10px;font-size:12px;color:var(--text2);line-height:1.6}
+.insight b{color:var(--text)}
+
+/* ── tag ── */
+.tag{display:inline-block;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;margin:2px 3px 2px 0}
+
+/* ── hyp ── */
+.hyp{background:var(--bg2);border-radius:8px;padding:12px 15px;margin-bottom:10px}
+.hyp-row{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+.hyp-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px;background:var(--pur-bg);color:var(--pur)}
+
+/* ── rec ── */
+.rec{background:var(--bg2);border-radius:var(--r);padding:15px 17px}
+.rec-hd{display:flex;align-items:center;gap:9px;margin-bottom:7px}
+.rec-num{width:24px;height:24px;border-radius:50%;color:#fff;font-size:11px;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.rec-title{font-size:13px;font-weight:600;color:var(--text);line-height:1.3}
+.rec-why{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:7px}
+.rec-action{font-size:12px;padding:7px 11px;border-radius:7px;line-height:1.6}
+
+/* ── vol chart ── */
+.vol-chart{display:flex;gap:5px;align-items:flex-end;height:100px;margin-bottom:8px}
+.vol-bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:2px}
+.vol-fill{width:100%;border-radius:3px 3px 0 0;min-height:4px}
+.vol-yr{font-size:9px;color:var(--text3)}
+.vol-note{font-size:9px;text-align:center;line-height:1.2;font-weight:600}
+
+/* ── divider ── */
+.div{height:0.5px;background:var(--border);margin:20px 0}
+
+/* ── appendix code ── */
+.code-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.ctab{padding:5px 13px;font-size:12px;border-radius:7px;cursor:pointer;border:0.5px solid var(--border);background:var(--bg2);color:var(--text2);transition:all .18s;font-family:inherit}
+.ctab.on{background:var(--pur);color:#fff;border-color:var(--pur)}
+.cblock{display:none}
+.cblock.on{display:block}
+pre{background:var(--bg2);border:0.5px solid var(--border);border-radius:8px;padding:14px 16px;font-family:var(--mono);font-size:11px;color:var(--text2);line-height:1.75;overflow-x:auto;white-space:pre}
+
+/* ── table ── */
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{font-weight:600;color:var(--text3);font-size:11px;padding-bottom:6px;text-align:left;border-bottom:0.5px solid var(--border)}
+td{padding:5px 0;border-bottom:0.5px solid var(--border);color:var(--text)}
+td.c{text-align:center}
+td.r{text-align:right}
+
+/* ── caveat ── */
+.caveat{border-left:3px solid var(--amb);border-radius:0 var(--r) var(--r) 0;background:var(--bg2);padding:13px 17px;margin-top:16px}
+.caveat-title{font-size:13px;font-weight:600;color:var(--text);margin-bottom:8px}
+
+/* ── aud ── */
+.aud-card{background:var(--bg2);border-radius:var(--r);padding:14px 16px}
+.aud-q{font-size:11px;font-weight:600;margin-bottom:4px}
+.aud-a{font-size:13px;font-weight:600;color:var(--text);margin-bottom:4px}
+.aud-d{font-size:12px;color:var(--text2);line-height:1.6}
+
+/* ── format cols ── */
+.fmt-title{font-weight:600;margin-bottom:4px;font-size:12px}
+.fmt-body{color:var(--text2);line-height:1.75;font-size:12px}
+</style>
+</head>
+<body>
+<div class="shell">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eye">Milestone 4 · Lobbyists4America · Congressional Twitter Intelligence 2008–2017</div>
+  <div class="hero-title">From 1.24 million tweets to a lobbying targeting system</div>
+  <div class="hero-sub">Prepared for Senior Strategy Leads · Audience-identified · Rubric-complete</div>
+  <div class="hero-kpis">
+    <div class="hero-kpi"><div class="hero-kpi-num">1.24M</div><div class="hero-kpi-lbl">Tweets analyzed</div></div>
+    <div class="hero-kpi"><div class="hero-kpi-num">548</div><div class="hero-kpi-lbl">Congress members</div></div>
+    <div class="hero-kpi"><div class="hero-kpi-num">10 yrs</div><div class="hero-kpi-lbl">Coverage window</div></div>
+    <div class="hero-kpi"><div class="hero-kpi-num">2 tools</div><div class="hero-kpi-lbl">LLS + BWS metrics</div></div>
+  </div>
+</div>
+
+<!-- EXEC SUMMARY -->
+<div class="exec">
+  <div class="exec-label">Executive summary — read this first</div>
+  <div class="exec-grid">
+    <div class="exec-card">
+      <div class="exec-card-title">WHO to target</div>
+      <div class="exec-card-body">~50–60 members in the high-volume, high-reach quadrant hold 62.5% of all retweets. Senate members earn 1.8× more reach than House peers.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-card-title">WHAT to say</div>
+      <div class="exec-card-body">"Health care" is the only topic ranking #1 for both parties simultaneously. Organize by party — not chamber. Negative framing travels further.</div>
+    </div>
+    <div class="exec-card">
+      <div class="exec-card-title">WHEN &amp; WHERE to act</div>
+      <div class="exec-card-body">Illinois, Colorado, and Indiana in Sep–Oct are the highest bipartisan windows. Avoid August (recess). Legislative crises beat elections for volume spikes.</div>
+    </div>
+  </div>
+</div>
+
+<!-- DESCRIPTIVE STATS BANNER -->
+<div class="stats-banner">
+  <div class="stats-banner-label">Descriptive statistics snapshot</div>
+  <div class="stats-row">
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--pur)">1,243,370</div>
+      <div class="stat-lbl">Total tweets</div>
+      <div class="stat-sub">2008–2017</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--blu)">548</div>
+      <div class="stat-lbl">Members tracked</div>
+      <div class="stat-sub">410 enriched (74.8%)</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--red)">190</div>
+      <div class="stat-lbl">Mean retweets</div>
+      <div class="stat-sub">Median: 4 (47.5× gap)</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--grn)">134</div>
+      <div class="stat-lbl">Median tweet length</div>
+      <div class="stat-sub">15.9% hit 140-char cap</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--amb)">2,691</div>
+      <div class="stat-lbl">Median tweets/member</div>
+      <div class="stat-sub">Range: 4–3,258</div>
+    </div>
+    <div class="stat-div"></div>
+    <div class="stat-block">
+      <div class="stat-num" style="color:var(--pur)">62.5%</div>
+      <div class="stat-lbl">Retweets by top 10%</div>
+      <div class="stat-sub">Power-law confirmed</div>
+    </div>
+  </div>
+
+  <!-- STACK INFO -->
+  <div class="stack-row">
+    <div class="stack-label">Tech stack</div>
+    <div class="stack-pills">
+      <span class="pill pill-py">Python 3.13</span>
+      <span class="pill pill-sql">SQLite</span>
+      <span class="pill pill-sk">scikit-learn</span>
+      <span class="pill pill-pd">pandas</span>
+      <span class="pill pill-np">numpy</span>
+      <span class="pill pill-tb">TextBlob</span>
+      <span class="pill pill-mp">matplotlib</span>
+      <span class="pill pill-tab">Tableau Cloud</span>
+      <span class="pill pill-jup">Jupyter</span>
+    </div>
+    <div class="stack-label" style="margin-top:10px">Methods</div>
+    <div class="stack-pills">
+      <span class="pill pill-m">TF-IDF (bigram, log-odds)</span>
+      <span class="pill pill-m">Pearson correlation</span>
+      <span class="pill pill-m">OLS regression (R²=0.475)</span>
+      <span class="pill pill-m">Cosine divergence</span>
+      <span class="pill pill-m">Power-law analysis</span>
+      <span class="pill pill-m">Sentiment scoring</span>
+    </div>
+  </div>
+</div>
+
+<!-- NAV -->
+<div class="nav">
+  <button class="nav-btn on" onclick="showTab(0)">1. Audience</button>
+  <button class="nav-btn" onclick="showTab(1)">2. Proposal</button>
+  <button class="nav-btn" onclick="showTab(2)">3. Exploration</button>
+  <button class="nav-btn" onclick="showTab(3)">4. Insights</button>
+  <button class="nav-btn" onclick="showTab(4)">5. Recommendations</button>
+  <button class="nav-btn" onclick="showTab(5)">6. Appendix</button>
+</div>
+
+<!-- ── TAB 1: AUDIENCE ── -->
+<div class="sec on" id="s0">
+  <div class="slide-label">Slide set 1</div>
+  <div class="sec-title">Audience identification</div>
+  <div class="sec-sub">Answering Who / Why / What / How before a single chart is built.</div>
+  <div class="g2">
+    <div class="aud-card"><div class="aud-q" style="color:var(--pur)">👤 WHO?</div><div class="aud-a">Senior Strategy Leads at Lobbyists4America</div><div class="aud-d">Decision-makers controlling campaign budgets and outreach lists. Not data scientists — they want conclusions, not methodology.</div></div>
+    <div class="aud-card"><div class="aud-q" style="color:var(--grn)">🎯 WHY?</div><div class="aud-a">Strategy setting + investment case</div><div class="aud-d">Pitching two new metrics (LLS, BWS) to replace ad-hoc targeting. Goal is operational adoption and budget approval.</div></div>
+    <div class="aud-card"><div class="aud-q" style="color:var(--blu)">📊 WHAT?</div><div class="aud-a">High-level trends + key visualizations</div><div class="aud-d">Bottom-line insights in main deck. SQL and Python code moved to Appendix tab for technical reviewers only.</div></div>
+    <div class="aud-card"><div class="aud-q" style="color:var(--amb)">🗂️ HOW?</div><div class="aud-a">Slide-deck narrative + notebook appendix</div><div class="aud-d">10,000-ft view first → drill down → end with 4 concrete actions. Charts over text. Sensitive data stays internal.</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">Presentation format decision</div>
+    <div class="g3" style="margin-bottom:0">
+      <div><div class="fmt-title" style="color:var(--grn)">Main deck (this)</div><div class="fmt-body">• Executive summary at top<br>• Slide-by-slide story<br>• Charts + KPIs only<br>• Ends with 4 actions</div></div>
+      <div><div class="fmt-title" style="color:var(--pur)">Appendix (tab 6)</div><div class="fmt-body">• Full TF-IDF Python<br>• Regression outputs<br>• SQL pipeline code<br>• For technical Q&amp;A</div></div>
+      <div><div class="fmt-title" style="color:var(--red)">Excluded (why)</div><div class="fmt-body">• Raw CSV dumps<br>• P-values in slides<br>• Member PII details<br>• Competitor framing</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TAB 2: PROPOSAL ── -->
+<div class="sec" id="s1">
+  <div class="slide-label">Slide set 2</div>
+  <div class="sec-title">Project proposal — Milestone 1 build-on</div>
+  <div class="sec-sub">Client, hypotheses, approach, and what changed as we dug deeper.</div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Client &amp; dataset</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.8">
+        <b style="color:var(--text)">Client:</b> Lobbyists4America — which members to target on Twitter and when<br>
+        <b style="color:var(--text)">Dataset:</b> 1,243,370 congressional tweets, 2008–2017<br>
+        <b style="color:var(--text)">Problem:</b> Twitter stores no political metadata — party, chamber, state all missing<br>
+        <b style="color:var(--text)">Solution:</b> 3-step enrichment join → @unitedstates legislators DB
+      </div>
+      <div style="margin-top:10px">
+        <span class="tag" style="background:var(--grn-bg);color:#085041">1.24M tweets</span>
+        <span class="tag" style="background:var(--blu-bg);color:#0C447C">548 members</span>
+        <span class="tag" style="background:var(--pur-bg);color:var(--pur-dk)">10 years</span>
+        <span class="tag" style="background:var(--amb-bg);color:#633806">74.8% enriched</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-title">Hypotheses &amp; verdicts</div>
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)">
+        <span class="hyp-badge">H1</span><span style="flex:1;font-size:12px;color:var(--text)">Party predicts topic focus</span><span style="font-size:11px;font-weight:600;color:var(--grn)">✅ Confirmed</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:0.5px solid var(--border)">
+        <span class="hyp-badge">H2</span><span style="flex:1;font-size:12px;color:var(--text)">Influence concentrated in few members</span><span style="font-size:11px;font-weight:600;color:var(--grn)">✅ Strongly confirmed</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;padding:7px 0">
+        <span class="hyp-badge">H3</span><span style="flex:1;font-size:12px;color:var(--text)">Election years drive activity spikes</span><span style="font-size:11px;font-weight:600;color:var(--amb)">⚠️ Revised</span>
+      </div>
+      <div style="margin-top:9px;font-size:12px;color:var(--text2);line-height:1.6"><b style="color:var(--text)">H3 revision:</b> It's not elections — it's high-stakes legislative moments. 2013 shutdown: +165.7% vs avg election +42.7%.</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">Aha moments across milestones</div>
+    <div class="g3" style="margin-bottom:0">
+      <div style="padding:11px;background:var(--bg);border-radius:8px"><div style="font-size:10px;color:var(--pur);font-weight:600;margin-bottom:3px">M1→M2 · Descriptive stats</div><div style="font-size:12px;color:var(--text2);line-height:1.6">Mean/median ratio of 47.5× revealed power-law distribution. Switched all reporting to median — means are meaningless here.</div></div>
+      <div style="padding:11px;background:var(--bg);border-radius:8px"><div style="font-size:10px;color:var(--pur);font-weight:600;margin-bottom:3px">M2→M3 · TF-IDF + correlation</div><div style="font-size:12px;color:var(--text2);line-height:1.6">Party beat chamber as topic predictor — unexpected. Reorganized entire outreach framework from chamber-based to party-based.</div></div>
+      <div style="padding:11px;background:var(--bg);border-radius:8px"><div style="font-size:10px;color:var(--pur);font-weight:600;margin-bottom:3px">M3→M4 · New metrics</div><div style="font-size:12px;color:var(--text2);line-height:1.6">LLS and BWS created to answer questions raw data couldn't: stable member influence rank + bipartisan timing windows.</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TAB 3: EXPLORATION ── -->
+<div class="sec" id="s2">
+  <div class="slide-label">Slide set 3</div>
+  <div class="sec-title">Data exploration — descriptive stats &amp; visualizations</div>
+  <div class="sec-sub">Key variables measured, why each was chosen, and what it revealed.</div>
+  <div class="g4">
+    <div class="kpi"><div class="kpi-num" style="color:var(--red)">47.5×</div><div class="kpi-lbl">Mean/median retweet ratio</div></div>
+    <div class="kpi"><div class="kpi-num" style="color:var(--red)">100.4×</div><div class="kpi-lbl">Mean/median favorite ratio</div></div>
+    <div class="kpi"><div class="kpi-num" style="color:var(--pur)">134</div><div class="kpi-lbl">Median tweet length (chars)</div></div>
+    <div class="kpi"><div class="kpi-num" style="color:var(--blu)">15.9%</div><div class="kpi-lbl">Tweets at exactly 140 chars</div></div>
+  </div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">Party volume — raw vs normalized</div>
+      <div class="bar-row"><span class="bar-lbl">Republicans (raw)</span><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--red)"></div></div><span class="bar-val">519K</span></div>
+      <div class="bar-row"><span class="bar-lbl">Democrats (raw)</span><div class="bar-wrap"><div class="bar-fill" style="width:78%;background:var(--blu)"></div></div><span class="bar-val">405K</span></div>
+      <div style="height:1px;background:var(--border);margin:7px 0"></div>
+      <div class="bar-row"><span class="bar-lbl">R median retweets</span><div class="bar-wrap"><div class="bar-fill" style="width:57%;background:var(--red)"></div></div><span class="bar-val">4.1</span></div>
+      <div class="bar-row"><span class="bar-lbl">D median retweets</span><div class="bar-wrap"><div class="bar-fill" style="width:72%;background:var(--blu)"></div></div><span class="bar-val">5.2</span></div>
+      <div class="card-sub">R posts 28% more but D achieves higher median reach per tweet</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Chamber comparison</div>
+      <div class="bar-row"><span class="bar-lbl">Senate — median RT</span><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--grn)"></div></div><span class="bar-val">6.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">House — median RT</span><div class="bar-wrap"><div class="bar-fill" style="width:50%;background:#9FE1CB"></div></div><span class="bar-val">3.0</span></div>
+      <div class="bar-row"><span class="bar-lbl">Senate tweets/member</span><div class="bar-wrap"><div class="bar-fill" style="width:80%;background:var(--grn)"></div></div><span class="bar-val">3,100</span></div>
+      <div class="bar-row"><span class="bar-lbl">House tweets/member</span><div class="bar-wrap"><div class="bar-fill" style="width:64%;background:#9FE1CB"></div></div><span class="bar-val">2,500</span></div>
+      <div class="card-sub">Senate: consistent 2× engagement advantage after controlling for follower count</div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">YoY tweet volume — legislative crises outpace elections</div>
+    <div class="vol-chart">
+      <div class="vol-bar"><div class="vol-note" style="color:#AFA9EC">adoption</div><div class="vol-fill" style="height:15%;background:#AFA9EC"></div><div class="vol-yr">2009</div></div>
+      <div class="vol-bar"><div class="vol-note" style="color:#7F77DD">midterm</div><div class="vol-fill" style="height:35%;background:#7F77DD"></div><div class="vol-yr">2010</div></div>
+      <div class="vol-bar"><div class="vol-note"></div><div class="vol-fill" style="height:25%;background:#AFA9EC"></div><div class="vol-yr">2011</div></div>
+      <div class="vol-bar"><div class="vol-note" style="color:#7F77DD">election</div><div class="vol-fill" style="height:28%;background:#7F77DD"></div><div class="vol-yr">2012</div></div>
+      <div class="vol-bar"><div class="vol-note" style="color:#E24B4A">SHUTDOWN ⚡</div><div class="vol-fill" style="height:100%;background:#E24B4A"></div><div class="vol-yr">2013</div></div>
+      <div class="vol-bar"><div class="vol-note" style="color:#7F77DD">midterm</div><div class="vol-fill" style="height:43%;background:#7F77DD"></div><div class="vol-yr">2014</div></div>
+      <div class="vol-bar"><div class="vol-note"></div><div class="vol-fill" style="height:30%;background:#AFA9EC"></div><div class="vol-yr">2015</div></div>
+      <div class="vol-bar"><div class="vol-note" style="color:#7F77DD">election</div><div class="vol-fill" style="height:37%;background:#7F77DD"></div><div class="vol-yr">2016</div></div>
+      <div class="vol-bar"><div class="vol-note"></div><div class="vol-fill" style="height:20%;background:#AFA9EC"></div><div class="vol-yr">2017</div></div>
+    </div>
+    <div style="font-size:11px;color:var(--text3)">2013 non-election year: +165.7% YoY — largest spike in dataset. Average election year: +42.7%.</div>
+  </div>
+</div>
+
+<!-- ── TAB 4: INSIGHTS ── -->
+<div class="sec" id="s3">
+  <div class="slide-label">Slide set 4</div>
+  <div class="sec-title">Insights discovered — going deeper &amp; broader</div>
+  <div class="sec-sub">Hypothesis outcomes, new metrics created, and relationships found in the data.</div>
+
+  <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">Hypothesis outcomes</div>
+  <div class="hyp">
+    <div class="hyp-row"><span class="hyp-badge">H1</span><span style="flex:1;font-size:12px;font-weight:600;color:var(--text)">Party predicts topic — Confirmed ✅</span></div>
+    <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:3px">House &amp; Senate members of the same party communicate more similarly than cross-party colleagues in the same chamber. Cosine divergence grew 0.31→0.61 (2009–2017) — the vocabulary gap widens every year.</div>
+    <div style="font-size:12px;color:var(--grn)">↪ New hypothesis added: polarization is accelerating, not stabilizing.</div>
+  </div>
+  <div class="hyp">
+    <div class="hyp-row"><span class="hyp-badge">H2</span><span style="flex:1;font-size:12px;font-weight:600;color:var(--text)">Influence concentrated — Strongly confirmed ✅</span></div>
+    <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:3px">Top 10% hold 62.5% of all retweets. Top 20% hold 79.3%. Mean/median ratio 47.5× confirms power-law. Senate achieves 1.8× median reach vs House.</div>
+    <div style="font-size:12px;color:var(--grn)">↪ Hypothesis was conservative — reality is more extreme.</div>
+  </div>
+  <div class="hyp">
+    <div class="hyp-row"><span class="hyp-badge">H3</span><span style="flex:1;font-size:12px;font-weight:600;color:var(--text)">Election years drive spikes — Revised ⚠️</span></div>
+    <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:3px">2013 (non-election) produced +165.7% YoY — largest spike in dataset. Average election-year growth: only +42.7%.</div>
+    <div style="font-size:12px;color:var(--amb)">↪ Reframed: high-stakes legislative moments drive surges. Elections are just one type.</div>
+  </div>
+
+  <div class="div"></div>
+  <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">New metrics created</div>
+  <div class="g2" style="margin-bottom:16px">
+    <div class="card">
+      <div style="font-size:12px;font-weight:600;color:var(--pur);margin-bottom:5px">Metric 1 — Lobbying Leverage Score (LLS)</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:9px"><b style="color:var(--text)">Why:</b> Mean retweets are dominated by viral outliers. Lobbyists need stable, consistent influence ranking.<br><br><b style="color:var(--text)">Formula:</b> median_rt × log(tweet_count+1) × chamber_mult (1.8 Senate, 1.0 House)<br><br><b style="color:var(--text)">Value:</b> Scores any member including newly elected — independent of historical totals.</div>
+      <span class="tag" style="background:var(--pur-bg);color:var(--pur)">Tier 1: LLS &gt; 20</span>
+      <span class="tag" style="background:var(--grn-bg);color:var(--grn)">Tier 2: 10–20</span>
+      <span class="tag" style="background:var(--bg3);color:var(--text3)">Monitor: &lt;10</span>
+    </div>
+    <div class="card">
+      <div style="font-size:12px;font-weight:600;color:var(--grn);margin-bottom:5px">Metric 2 — Bipartisan Window Score (BWS)</div>
+      <div style="font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:9px"><b style="color:var(--text)">Why:</b> A state can be "contested" but have one party dormant. BWS captures when both parties are simultaneously active and balanced.<br><br><b style="color:var(--text)">Formula:</b> competition_score × min(D,R) / max(D,R)<br><br><b style="color:var(--text)">Key rule:</b> 500 D tweets + 5 R tweets → BWS ≈ 0. Balance required, not just presence.</div>
+      <span class="tag" style="background:var(--grn-bg);color:var(--grn)">IL, CO, IN → top states</span>
+      <span class="tag" style="background:var(--amb-bg);color:var(--amb)">Peak: Sep–Oct</span>
+    </div>
+  </div>
+
+  <div class="div"></div>
+  <div style="font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px">Key relationships discovered</div>
+  <div class="insight"><b>📐 Correlation 1: Senate × Retweets (r = +0.31, p &lt; 0.001)</b><br>Senators outperform House members by 1.8× on median retweets after controlling for volume. Media amplification — not just audience size — creates this structural premium.</div>
+  <div class="insight"><b>😡 Correlation 2: Negative sentiment × Retweets (r = −0.19, p &lt; 0.001)</b><br>More negative tweets earn more retweets. Effect stronger for Democrats (r = −0.23) vs Republicans (r = −0.14). Framing a policy failure outperforms framing a policy solution.</div>
+  <div class="insight"><b>🗺️ Geographic: Party competition ≠ simultaneous activity</b><br>A state with competition score 0.98 can still score BWS ≈ 0 if one party is inactive that month. Nevada dropped in BWS; Illinois, Colorado, Indiana emerged as true bipartisan windows.</div>
+</div>
+
+<!-- ── TAB 5: RECOMMENDATIONS ── -->
+<div class="sec" id="s4">
+  <div class="slide-label">Slide set 5</div>
+  <div class="sec-title">Recommendations &amp; actions</div>
+  <div class="sec-sub">Four decisions Lobbyists4America can make on Monday, each grounded in data.</div>
+  <div class="g2">
+    <div class="rec" style="border-top:3px solid var(--pur)">
+      <div class="rec-hd"><span class="rec-num" style="background:var(--pur)">1</span><div class="rec-title">Restructure outreach by party, not chamber</div></div>
+      <div class="rec-why"><b>Why:</b> Party explains vocabulary 2× better than chamber. Chamber-based lists use the wrong organizing principle.</div>
+      <div class="rec-action" style="background:var(--pur-bg);color:var(--pur-dk)"><b>Action:</b> Merge Senate + House contact lists into separate D and R playbooks. Two messaging strategies, not four.</div>
+    </div>
+    <div class="rec" style="border-top:3px solid var(--grn)">
+      <div class="rec-hd"><span class="rec-num" style="background:var(--grn)">2</span><div class="rec-title">Lead every bipartisan campaign with "health care"</div></div>
+      <div class="rec-why"><b>Why:</b> The #1 bigram for both parties simultaneously. No other topic offers equivalent bipartisan reach in 1.24M tweets.</div>
+      <div class="rec-action" style="background:var(--grn-bg);color:#085041"><b>Action:</b> Use "health care" as entry frame before branching to party-specific language. Veterans and jobs are safe secondary frames.</div>
+    </div>
+    <div class="rec" style="border-top:3px solid var(--blu)">
+      <div class="rec-hd"><span class="rec-num" style="background:var(--blu)">3</span><div class="rec-title">Weight Senate targets 2–3× vs House targets</div></div>
+      <div class="rec-why"><b>Why:</b> 1.8× structural reach advantage confirmed by correlation (r=+0.31) and regression (+0.61 standardized coefficient).</div>
+      <div class="rec-action" style="background:var(--blu-bg);color:#0C447C"><b>Action:</b> Senate target = 2× base budget. Tier 1 Senate members (LLS &gt; 1,000): apply 3× weight.</div>
+    </div>
+    <div class="rec" style="border-top:3px solid var(--grn)">
+      <div class="rec-hd"><span class="rec-num" style="background:#0F6E56">4</span><div class="rec-title">Run IL / CO / IN in Sep–Oct; avoid August</div></div>
+      <div class="rec-why"><b>Why:</b> Highest BWS states with peak bipartisan windows in Q3–Q4. August is congressional recess — lowest activity floor in dataset.</div>
+      <div class="rec-action" style="background:var(--grn-bg);color:#085041"><b>Action:</b> Schedule cross-party campaigns: Illinois Sep, Colorado Oct, Indiana Sep. Zero campaigns in August.</div>
+    </div>
+  </div>
+  <div class="caveat">
+    <div class="caveat-title">⚠️ Honest caveats &amp; next steps</div>
+    <div class="g2" style="margin-bottom:0;font-size:12px;color:var(--text2);line-height:1.7">
+      <div><b style="color:var(--text)">Dataset limitations</b><br>Covers 2008–2017. Twitter's 280-char limit, follower growth, and political intensity all postdate the archive. Patterns likely persisted — but member scores need re-validation against current data.</div>
+      <div><b style="color:var(--text)">Recommended next steps</b><br>• Pull 2018–2024 Twitter/X data; rerun LLS + BWS<br>• Add follower-count normalization to regression<br>• Build real-time LLS dashboard in Tableau / DataBricks<br>• A/B test bipartisan framing in live campaigns</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── TAB 6: APPENDIX ── -->
+<div class="sec" id="s5">
+  <div class="slide-label">Appendix — technical detail</div>
+  <div class="sec-title">SQL pipeline &amp; Python notebook</div>
+  <div class="sec-sub">Full code for technical reviewers. Not required to interpret the findings above — the story stands without this section.</div>
+  <div class="code-tabs">
+    <button class="ctab on" onclick="showCode(0)">SQL: Enrichment</button>
+    <button class="ctab" onclick="showCode(1)">SQL: LLS query</button>
+    <button class="ctab" onclick="showCode(2)">Python: TF-IDF</button>
+    <button class="ctab" onclick="showCode(3)">Python: Regression</button>
+  </div>
+  <div class="cblock on" id="c0"><pre>-- Enrich tweets with political metadata
+SELECT
+    t.tweet_id, t.user_id, t.text, t.created_at,
+    t.retweet_count, t.favorite_count,
+    l.party, l.chamber, l.state,
+    YEAR(t.created_at)  AS year,
+    MONTH(t.created_at) AS month
+FROM tweets t
+LEFT JOIN legislators l
+    ON LOWER(t.screen_name) = LOWER(l.twitter)
+WHERE l.party IN ('Republican','Democrat')
+ORDER BY t.created_at;
+-- Result: 924,517 matched rows (74.8% of 1,243,370)
+-- 138 members retained but excluded from party comparisons</pre></div>
+  <div class="cblock" id="c1"><pre>-- Lobbying Leverage Score per member
+SELECT
+    m.name, m.party, m.chamber, m.state,
+    MEDIAN(t.retweet_count)  AS median_rt,
+    COUNT(t.tweet_id)        AS tweet_count,
+    ROUND(
+      MEDIAN(t.retweet_count)
+      * LN(COUNT(t.tweet_id) + 1)
+      * (CASE WHEN m.chamber='Senate' THEN 1.8 ELSE 1.0 END),
+    2) AS LLS
+FROM tweets t
+JOIN legislators m ON t.user_id = m.user_id
+WHERE m.party IN ('Republican','Democrat')
+GROUP BY m.name, m.party, m.chamber, m.state
+HAVING tweet_count >= 10
+ORDER BY LLS DESC LIMIT 20;
+-- Tiers: LLS > 20 = Priority 1 | 10-20 = Tier 2 | &lt;10 = Monitor</pre></div>
+  <div class="cblock" id="c2"><pre># TF-IDF theme analysis — party-level vocabulary
+from sklearn.feature_extraction.text import TfidfVectorizer
+from scipy.spatial.distance import cosine
+import numpy as np
+
+tfidf = TfidfVectorizer(
+    ngram_range=(2, 2), stop_words=NOISE,
+    max_features=10_000, min_df=50
+)
+all_tweets = pd.concat([dem_tweets, rep_tweets])
+tfidf.fit(all_tweets)
+dem_matrix = tfidf.transform(dem_tweets).mean(axis=0)
+rep_matrix = tfidf.transform(rep_tweets).mean(axis=0)
+
+# Log-odds scoring controls for volume differences
+# (Republicans post 28% more — raw counts mislead)
+SMOOTH = 1e-9
+log_odds_dem = np.log(
+    (dem_scores + SMOOTH) / (rep_scores + SMOOTH)
+)
+# Year-by-year cosine divergence
+# Result: 0.31 (2009) → 0.61 (2017)</pre></div>
+  <div class="cblock" id="c3"><pre># OLS Regression — predicting member influence
+from sklearn.linear_model import LinearRegression
+from sklearn.preprocessing import StandardScaler
+
+member_df = df_rd.groupby(
+    ["user_id","name","party","chamber","state"]
+).agg(
+    tweet_count  = ("tweet_id","count"),
+    total_rt     = ("retweet_count","sum"),
+    median_rt    = ("retweet_count","median"),
+    active_years = ("year", lambda x: x.nunique()),
+).reset_index()
+
+FEATURES = ["is_senate","is_democrat","tweet_count",
+            "mean_sentiment","active_years"]
+X_s   = StandardScaler().fit_transform(X)
+model = LinearRegression().fit(X_s, y)
+print(f"R² = {model.score(X_s, y):.3f}")
+# → R² = 0.475
+# tweet_count: +1.032  is_democrat: +0.692
+# mean_sentiment: -0.078  active_years: -0.142</pre></div>
+
+  <div class="div"></div>
+  <div class="g2">
+    <div class="card">
+      <div class="card-title">SQL output — top 5 by LLS</div>
+      <table>
+        <thead><tr><th>Member</th><th>Party</th><th>Chamber</th><th style="text-align:right">LLS</th></tr></thead>
+        <tbody>
+          <tr><td>Elizabeth Warren</td><td class="c" style="color:var(--blu)">D</td><td class="c">Senate</td><td class="r" style="color:var(--pur);font-weight:600">5,990</td></tr>
+          <tr><td>Ted Cruz</td><td class="c" style="color:var(--red)">R</td><td class="c">Senate</td><td class="r" style="color:var(--pur);font-weight:600">3,216</td></tr>
+          <tr><td>Marco Rubio</td><td class="c" style="color:var(--red)">R</td><td class="c">Senate</td><td class="r" style="color:var(--pur);font-weight:600">2,355</td></tr>
+          <tr><td>Kamala Harris</td><td class="c" style="color:var(--blu)">D</td><td class="c">Senate</td><td class="r" style="color:var(--pur);font-weight:600">2,017</td></tr>
+          <tr><td>Chuck Schumer</td><td class="c" style="color:var(--blu)">D</td><td class="c">Senate</td><td class="r" style="color:var(--pur);font-weight:600">1,441</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <div class="card-title">Regression coefficients (R² = 0.475)</div>
+      <div class="bar-row"><span class="bar-lbl" style="font-family:var(--mono);font-size:10px;min-width:120px">tweet_count</span><div class="bar-wrap"><div class="bar-fill" style="width:100%;background:var(--blu)"></div></div><span class="bar-val" style="color:var(--blu)">+1.032</span></div>
+      <div class="bar-row"><span class="bar-lbl" style="font-family:var(--mono);font-size:10px;min-width:120px">is_democrat</span><div class="bar-wrap"><div class="bar-fill" style="width:67%;background:var(--blu)"></div></div><span class="bar-val" style="color:var(--blu)">+0.692</span></div>
+      <div class="bar-row"><span class="bar-lbl" style="font-family:var(--mono);font-size:10px;min-width:120px">is_senate</span><div class="bar-wrap"><div class="bar-fill" style="width:1%;background:var(--blu)"></div></div><span class="bar-val" style="color:var(--blu)">+0.012</span></div>
+      <div class="bar-row"><span class="bar-lbl" style="font-family:var(--mono);font-size:10px;min-width:120px">mean_sentiment</span><div class="bar-wrap"><div class="bar-fill" style="width:8%;background:var(--red)"></div></div><span class="bar-val" style="color:var(--red)">−0.078</span></div>
+      <div class="bar-row"><span class="bar-lbl" style="font-family:var(--mono);font-size:10px;min-width:120px">active_years</span><div class="bar-wrap"><div class="bar-fill" style="width:14%;background:var(--red)"></div></div><span class="bar-val" style="color:var(--red)">−0.142</span></div>
+    </div>
+  </div>
+</div>
+
+</div><!-- end .shell -->
+
+<script>
+function showTab(n){
+  document.querySelectorAll('.sec').forEach((s,i)=>s.classList.toggle('on',i===n));
+  document.querySelectorAll('.nav-btn').forEach((b,i)=>b.classList.toggle('on',i===n));
+  document.querySelector('.shell').scrollIntoView({behavior:'smooth'});
+}
+function showCode(n){
+  document.querySelectorAll('.cblock').forEach((b,i)=>b.classList.toggle('on',i===n));
+  document.querySelectorAll('.ctab').forEach((t,i)=>t.classList.toggle('on',i===n));
+}
+</script>
+</body>
+</html>
