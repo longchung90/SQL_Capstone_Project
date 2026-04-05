@@ -22,15 +22,10 @@
 
 | | |
 |:---:|:---:|
-| <img src="figures/fig1_dem_bigrams.png" alt="Fig 1 — Top 20 Democrat Bigrams" width="100%"/><br><sub>Fig 1 — Top 20 Democrat Bigrams</sub> | <img src="figures/fig2_rep_bigrams.png" alt="Fig 2 — Top 20 Republican Bigrams" width="100%"/><br><sub>Fig 2 — Top 20 Republican Bigrams</sub> |
-| <img src="figures/fig3_bipartisan_bigrams.png" alt="Fig 3 — Top 15 Bipartisan Bigrams" width="100%"/><br><sub>Fig 3 — Top 15 Bipartisan Bigrams</sub> | <img src="figures/fig4_vocab_divergence.png" alt="Fig 4 — Vocabulary Divergence Over Time" width="100%"/><br><sub>Fig 4 — Vocabulary Divergence Over Time</sub> |
-| <img src="figures/fig5_retweet_dist.png" alt="Fig 5 — Retweet Distribution: Senate vs House" width="100%"/><br><sub>Fig 5 — Retweet Distribution: Senate vs House</sub> | <img src="figures/fig6_sentiment_retweets.png" alt="Fig 6 — Sentiment vs Log Retweet Count" width="100%"/><br><sub>Fig 6 — Sentiment vs Log Retweet Count</sub> |
-| <img src="figures/fig7_ols_coefficients.png" alt="Fig 7 — OLS Regression Coefficients" width="100%"/><br><sub>Fig 7 — OLS Regression Coefficients</sub> | <img src="figures/fig8_top_lls_members.png" alt="Fig 8 — Top 20 Members by LLS" width="100%"/><br><sub>Fig 8 — Top 20 Members by LLS</sub> |
-
-<div align="center">
-  <img src="figures/fig9_bws_heatmap.png" alt="Fig 9 — Bipartisan Window Score Heatmap by State × Month" width="80%"/><br>
-  <sub>Fig 9 — Bipartisan Window Score Heatmap by State × Month</sub>
-</div>
+| <img src="figures/chart_m3_fig1_fig2_bigrams.png" alt="Fig 1–2 — Top 20 Bigrams by Party" width="100%"/><br><sub>Fig 1–2 — Top 20 Bigrams by Party</sub> | <img src="figures/chart_m3_fig3_bipartisan.png" alt="Fig 3 — Top 15 Bipartisan Bigrams" width="100%"/><br><sub>Fig 3 — Top 15 Bipartisan Bigrams</sub> |
+| <img src="figures/chart_m3_fig4_divergence.png" alt="Fig 4 — Vocabulary Divergence Over Time" width="100%"/><br><sub>Fig 4 — Vocabulary Divergence Over Time</sub> | <img src="figures/chart_m3_fig5_chamber_box.png" alt="Fig 5 — Retweet Distribution: Senate vs House" width="100%"/><br><sub>Fig 5 — Retweet Distribution: Senate vs House</sub> |
+| <img src="figures/chart_m3_fig6_sentiment_scatter.png" alt="Fig 6 — Sentiment vs Log Retweet Count" width="100%"/><br><sub>Fig 6 — Sentiment vs Log Retweet Count</sub> | <img src="figures/chart_m3_fig7_regression.png" alt="Fig 7 — OLS Regression Coefficients" width="100%"/><br><sub>Fig 7 — OLS Regression Coefficients</sub> |
+| <img src="figures/chart_m3_fig8_lls.png" alt="Fig 8 — Top 20 Members by LLS" width="100%"/><br><sub>Fig 8 — Top 20 Members by LLS</sub> | <img src="figures/chart_m3_fig9_bws_heatmap.png" alt="Fig 9 — Bipartisan Window Score Heatmap" width="100%"/><br><sub>Fig 9 — Bipartisan Window Score Heatmap by State × Month</sub> |
 
 ---
 
@@ -48,7 +43,7 @@ This capstone project analyzes a decade of congressional Twitter activity to bui
 git clone https://github.com/username/congressional-twitter-intelligence.git
 cd congressional-twitter-intelligence
 pip install -r requirements.txt
-jupyter notebook notebooks/milestone_3.ipynb
+jupyter notebook notebooks/M3.ipynb
 ```
 
 ---
@@ -70,13 +65,20 @@ jupyter notebook notebooks/milestone_3.ipynb
 
 ```
 repo/
-├── figures/                  # All saved charts & plots (Fig 1–9)
-├── data/                     # Place raw dataset here (see below)
+├── figures/                        # All saved charts & plots (Fig 1–9 + supplementary)
+├── data/
+│   ├── export/                     # CSV exports for Tableau
+│   └── US_PoliticalTweets.tar.gz   # Raw dataset (not tracked — see Data section)
 ├── notebooks/
-│   ├── milestone_1.ipynb     # Data enrichment & setup
-│   ├── milestone_2.ipynb     # Descriptive statistics
-│   └── milestone_3.ipynb     # TF-IDF, regression, custom metrics
-├── requirements.txt
+│   ├── M3.ipynb                    # TF-IDF, regression, custom metrics
+│   ├── US_Political_Tweet_War_M2.ipynb  # Descriptive statistics
+│   ├── Project_Proposal.ipynb      # Project proposal
+│   └── Project_Proposal.pdf        # Proposal PDF export
+├── presentation/
+│   └── Lobbyists4America.html      # Final HTML presentation
+├── sql/
+│   └── SQL-Query.ipynb             # SQL queries notebook
+├── .gitignore
 └── README.md
 ```
 
@@ -88,9 +90,9 @@ The raw dataset (`US_PoliticalTweets.tar.gz`, 229MB) is not included in this rep
 
 Download it from: [link to original source or Google Drive]
 
-Once downloaded, place it in the `data/` folder and run `notebooks/milestone_3.ipynb` from the top.
+Once downloaded, place it in the `data/` folder and run `notebooks/M3.ipynb` from the top.
 
-
+---
 
 ## ⚠️ Caveats
 
